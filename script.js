@@ -214,10 +214,20 @@ const dodgeLines = [
   "My heart says try again 💗",
   "Okay okay… but hear me out 🥺",
   "I’m blushing… just a little 🫶",
-  "One more time…? 🌹"
+  "One more time…? 🌹",
+  "You almost got me 😏",
+  "My heart is running away 💞",
+  "Catch me if you can 💘",
+  "No button is shy today 🙈",
+  "Are you really saying no? 😜",
+  "Think again, beautiful 💖",
+  "My butterflies say yes 🦋",
+  "I’ll stop soon… maybe 😇",
+  "Last chance to chase me 😌"
 ];
 
-let dodgesLeft = 5;
+
+let dodgesLeft = 10;
 
 function dodgeNo() {
   if (dodgesLeft <= 0) return;
