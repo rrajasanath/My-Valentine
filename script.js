@@ -235,8 +235,8 @@ function dodgeNo() {
   dodgesLeft--;
   note.textContent = dodgeLines[Math.floor(Math.random() * dodgeLines.length)];
 
-  const x = (Math.random() * 240 - 120);
-  const y = (Math.random() * 120 - 60);
+  const x = (Math.random() * 320 - 160);
+const y = (Math.random() * 180 - 90);
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
   if (dodgesLeft === 0) {
