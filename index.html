@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will you be my Valentine?</title>
+  <link rel="stylesheet" href="style.css" />
+  <button id="musicBtn" class="musicBtn">Play music 🎵</button>
+
+</head>
+
+<body>
+
+  <main class="card">
+    <div class="badge">💌 A tiny question with a big meaning</div>
+
+    <h1>Will you be my Valentine baby?</h1>
+
+    <p class="sub">
+      I don’t need a perfect day. I just want
+      <span class="accent">you</span> —
+      your smile, your laugh, and the way you make everything feel like home.
+    </p>
+
+    <div class="btns" id="btnArea">
+      <button id="yesBtn">Yes 💘</button>
+      <button id="noBtn" aria-label="No button">No 🙈</button>
+    </div>
+
+    <div class="note" id="note"></div>
+
+    <div class="names">
+      From: <strong>Sanath</strong> to <strong>Abinaya</strong>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modalCard" role="dialog" aria-modal="true">
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+
+      <div class="modalBtns">
+        <button class="primary" id="modalOk">Aww baby ❤️</button>
+        <button class="ghost" id="modalCopy">Copy message</button>
+      </div>
+
+      <div class="tiny">I always love you more and more mah gorgeous.</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
