@@ -162,13 +162,13 @@ volume.addEventListener("input", () => {
 // ===== Modal =====
 function showModal(type) {
   if (type === "yes") {
-    modalTitle.textContent = "YAY!! 💖";
+    modalTitle.textContent = "YAY!! ðŸ’–";
     modalText.textContent =
-      "Okay… I’m officially the happiest person today. I’ll plan something sweet—just you and me. 🌹";
+      "Okayâ€¦ Iâ€™m officially the happiest person today. Iâ€™ll plan something sweetâ€”just you and me. ðŸŒ¹";
   } else {
-    modalTitle.textContent = "Always respected 💛";
+    modalTitle.textContent = "Always respected ðŸ’›";
     modalText.textContent =
-      "Thank you for being honest. No pressure, no bad feelings—I'm still lucky to have you in my life.";
+      "Thank you for being honest. No pressure, no bad feelingsâ€”I'm still lucky to have you in my life.";
   }
 
   modal.classList.add("show");
@@ -207,46 +207,117 @@ function burstHearts() {
   }
 }
 
-// ===== Button logic (respectful playful NO) =====
+// ===== Button logic (playful NO, still respectful) =====
 const dodgeLines = [
-  "Hehe… are you sure? 😇",
-  "Not so fast 😌",
-  "My heart says try again 💗",
-  "Okay okay… but hear me out 🥺",
-  "I’m blushing… just a little 🫶",
-  "One more time…? 🌹",
-  "You almost got me 😏",
-  "My heart is running away 💞",
-  "Catch me if you can 💘",
-  "No button is shy today 🙈",
-  "Are you really saying no? 😜",
-  "Think again, beautiful 💖",
-  "My butterflies say yes 🦋",
-  "I’ll stop soon… maybe 😇",
-  "Last chance to chase me 😌"
+  "Heheâ€¦ are you sure? ðŸ˜‡",
+  "Not so fast ðŸ˜Œ",
+  "My heart says try again ðŸ’—",
+  "Okay okayâ€¦ but hear me out ðŸ¥º",
+  "Iâ€™m blushingâ€¦ just a little ðŸ«¶",
+  "One more timeâ€¦? ðŸŒ¹",
+  "You almost got me ðŸ˜",
+  "My heart is running away ðŸ’ž",
+  "Catch me if you can ðŸ’˜",
+  "No button is shy today ðŸ™ˆ",
+  "Are you really saying no? ðŸ˜œ",
+  "Think again, beautiful ðŸ’–",
+  "My butterflies say yes ðŸ¦‹",
+  "Iâ€™ll stop soonâ€¦ maybe ðŸ˜‡",
+  "Last chance to chase me ðŸ˜Œ",
+  "Nopeâ€”too cute to click ðŸ˜…",
+  "Try again, my love ðŸ’•",
+  "Youâ€™re chasing my heart ðŸ˜"
 ];
 
-
 let dodgesLeft = 10;
+
+// Keep the NO button inside the button area (works better than translate())
+const btnArea = document.getElementById("btnArea");
+let noButtonAnchored = false;
+
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
+
+function anchorNoButton() {
+  if (noButtonAnchored) return;
+
+  // Make NO absolutely-positioned within the btnArea, so we can place it safely.
+  // Keep YES in normal flow; only NO becomes absolute.
+  btnArea.style.position = "relative";
+  noBtn.style.position = "absolute";
+
+  // Put it near its original spot
+  const areaRect = btnArea.getBoundingClientRect();
+  const noRect = noBtn.getBoundingClientRect();
+
+  const left = clamp(noRect.left - areaRect.left, 0, areaRect.width - noRect.width);
+  const top  = clamp(noRect.top  - areaRect.top,  0, areaRect.height - noRect.height);
+
+  noBtn.style.left = left + "px";
+  noBtn.style.top = top + "px";
+  noBtn.style.transform = "none";
+
+  noButtonAnchored = true;
+}
+
+function moveNoButtonRandom() {
+  anchorNoButton();
+
+  const areaRect = btnArea.getBoundingClientRect();
+
+  // Button sizes AFTER anchoring
+  const btnW = noBtn.offsetWidth || 120;
+  const btnH = noBtn.offsetHeight || 44;
+
+  // Give extra vertical room so it can dodge without overlapping too weirdly.
+  // (We temporarily increase the area height if needed.)
+  const minAreaH = Math.max(areaRect.height, 120);
+  if (btnArea.offsetHeight < minAreaH) btnArea.style.height = minAreaH + "px";
+
+  const maxLeft = Math.max(0, btnArea.clientWidth - btnW);
+  const maxTop = Math.max(0, btnArea.clientHeight - btnH);
+
+  const left = Math.random() * maxLeft;
+  const top  = Math.random() * maxTop;
+
+  noBtn.style.left = left + "px";
+  noBtn.style.top  = top + "px";
+
+  // tiny playful scale
+  const scale = 0.9 + Math.random() * 0.35;
+  noBtn.style.scale = String(scale);
+}
+
+function finishNoDodges() {
+  note.textContent = "Okay, Iâ€™ll stop teasing ðŸ˜Š You can choose freely.";
+  noBtn.textContent = "No (itâ€™s okay) ðŸ’›";
+  noBtn.style.scale = "1";
+  // Keep it in a nice stable spot
+  if (noButtonAnchored) {
+    noBtn.style.left = "50%";
+    noBtn.style.top = "50%";
+    noBtn.style.transform = "translate(-50%, -50%)";
+  }
+}
 
 function dodgeNo() {
   if (dodgesLeft <= 0) return;
 
   dodgesLeft--;
   note.textContent = dodgeLines[Math.floor(Math.random() * dodgeLines.length)];
+  moveNoButtonRandom();
 
-  const x = (Math.random() * 320 - 160);
-const y = (Math.random() * 180 - 90);
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-
-  if (dodgesLeft === 0) {
-    note.textContent = "Okay, I’ll stop teasing 😊 You can choose freely.";
-    noBtn.style.transform = "translate(0,0)";
-    noBtn.textContent = "No (it’s okay) 💛";
-  }
+  if (dodgesLeft === 0) finishNoDodges();
 }
 
-noBtn.addEventListener("mouseenter", dodgeNo);
+// Desktop: hover near the button
+noBtn.addEventListener("pointerenter", () => {
+  // On touch screens, pointerenter can trigger oddly; only dodge if it's a mouse.
+  if (window.matchMedia && window.matchMedia("(hover: hover)").matches) dodgeNo();
+});
+
+// Mobile: first taps should dodge (prevent click)
 noBtn.addEventListener(
   "touchstart",
   (e) => {
@@ -258,8 +329,10 @@ noBtn.addEventListener(
   { passive: false }
 );
 
-noBtn.addEventListener("click", () => {
+// If user somehow clicks while dodging, keep dodging
+noBtn.addEventListener("click", (e) => {
   if (dodgesLeft > 0) {
+    e.preventDefault();
     dodgeNo();
     return;
   }
@@ -267,27 +340,28 @@ noBtn.addEventListener("click", () => {
 });
 
 // YES click
+
 yesBtn.addEventListener("click", async () => {
   // Ensure music starts (mobile-friendly)
   await tryPlayMusic({ showOverlayOnFail: true });
 
   burstHearts();
-  note.textContent = "I knew it 💘";
+  note.textContent = "I knew it ðŸ’˜";
   showModal("yes");
 });
 
 // Copy
 modalCopy.addEventListener("click", async () => {
   const text =
-`Will you be my Valentine? 💌
+`Will you be my Valentine? ðŸ’Œ
 
-I don’t need a perfect day. I just want you — your smile, your laugh, and the way you make everything feel like home.
+I donâ€™t need a perfect day. I just want you â€” your smile, your laugh, and the way you make everything feel like home.
 
-— Sanath`;
+â€” Sanath`;
 
   try {
     await navigator.clipboard.writeText(text);
-    modalCopy.textContent = "Copied ✅";
+    modalCopy.textContent = "Copied âœ…";
     setTimeout(() => (modalCopy.textContent = "Copy message"), 1200);
   } catch {
     modalCopy.textContent = "Copy failed";
