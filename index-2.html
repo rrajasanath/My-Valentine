@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Background Music from Best Part -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/o_1aF54DO60?start=65&autoplay=1&loop=1&playlist=o_1aF54DO60"
+frameborder="0"
+allow="autoplay"
+allowfullscreen>
+</iframe>
+<script>
+document.getElementById("yesBtn").addEventListener("click", function(){
+  const music = document.createElement("iframe");
+  music.width = "0";
+  music.height = "0";
+  music.src = "https://www.youtube.com/embed/o_1aF54DO60?start=65&autoplay=1&loop=1&playlist=o_1aF54DO60";
+  music.allow = "autoplay";
+  document.body.appendChild(music);
+});
+</script>
+
+</iframe>
+  <title>Will you be my Valentine?</title>
+
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ffe3ec;
+      --card:#ffffffcc;
+      --text:#2b2b2b;
+      --accent:#ff4d6d;
+      --accent2:#ff8fab;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(1200px 700px at 20% 10%, var(--bg1), transparent),
+                  radial-gradient(1200px 700px at 80% 90%, var(--bg2), transparent),
+                  linear-gradient(135deg, #fff, #ffeef4);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      overflow:hidden;
+    }
+
+    /* floating hearts */
+    .heart{
+      position:absolute;
+      width:18px;height:18px;
+      transform: rotate(45deg);
+      background: var(--accent2);
+      opacity:.25;
+      border-radius:4px;
+      animation: floatUp linear infinite;
+      filter: blur(.2px);
+    }
+    .heart:before, .heart:after{
+      content:"";
+      position:absolute;
+      width:18px;height:18px;
+      background: var(--accent2);
+      border-radius:50%;
+    }
+    .heart:before{ left:-9px; top:0; }
+    .heart:after{ top:-9px; left:0; }
+
+    @keyframes floatUp{
+      from{ transform: translateY(40vh) rotate(45deg); }
+      to{ transform: translateY(-120vh) rotate(45deg); }
+    }
+
+    .card{
+      width:min(680px, 92vw);
+      background:var(--card);
+      border:1px solid #ffffff;
+      box-shadow: 0 20px 50px rgba(0,0,0,.08);
+      backdrop-filter: blur(10px);
+      border-radius:24px;
+      padding:28px 22px;
+      position:relative;
+      z-index:2;
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background: #fff;
+      border:1px solid #ffd1dc;
+      font-size:13px;
+      letter-spacing:.2px;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:10px 0 8px;
+      font-size: clamp(26px, 4.5vw, 44px);
+      line-height:1.05;
+    }
+    .sub{
+      margin:0 auto 18px;
+      max-width: 52ch;
+      font-size: 15.5px;
+      opacity:.85;
+    }
+
+    .names{
+      margin-top:10px;
+      font-size:14px;
+      opacity:.75;
+    }
+
+    .btns{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      height:72px;
+      align-items:center;
+    }
+
+    button{
+      border:0;
+      border-radius:999px;
+      padding:14px 22px;
+      font-size:16px;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      user-select:none;
+    }
+    #yesBtn{
+      background: var(--accent);
+      color:#fff;
+      box-shadow: 0 10px 24px rgba(255,77,109,.35);
+    }
+    #yesBtn:hover{ transform: translateY(-2px) scale(1.02); }
+
+    #noBtn{
+      background:#fff;
+      color:#333;
+      border:1px solid #ffd1dc;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+      position:relative;
+    }
+    #noBtn:hover{ transform: translateY(-2px); }
+
+    .note{
+      margin-top:14px;
+      font-size: 14px;
+      min-height: 22px;
+      opacity:.85;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:5;
+    }
+    .modal.show{ display:flex; }
+    .modalCard{
+      width:min(560px, 92vw);
+      background:#fff;
+      border-radius:22px;
+      padding:22px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.22);
+      text-align:center;
+    }
+    .modalCard h2{ margin: 6px 0 6px; }
+    .modalCard p{ margin: 0 0 16px; opacity:.86; }
+    .modalBtns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .ghost{
+      background:#fff;
+      border:1px solid #eee;
+      padding:12px 18px;
+    }
+    .primary{
+      background: var(--accent);
+      color:#fff;
+      padding:12px 18px;
+      box-shadow: 0 10px 24px rgba(255,77,109,.25);
+    }
+    .tiny{
+      margin-top:10px;
+      font-size:12.5px;
+      opacity:.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- floating hearts -->
+  <script>
+    // generate floating hearts
+    const HEARTS = 18;
+    for(let i=0;i<HEARTS;i++){
+      const h=document.createElement('div');
+      h.className='heart';
+      const left=Math.random()*100;
+      const delay=Math.random()*8;
+      const dur=10+Math.random()*12;
+      const size=12+Math.random()*18;
+      h.style.left = left+'vw';
+      h.style.animationDelay = delay+'s';
+      h.style.animationDuration = dur+'s';
+      h.style.width = size+'px';
+      h.style.height = size+'px';
+      h.style.opacity = (0.12 + Math.random()*0.22).toFixed(2);
+      document.body.appendChild(h);
+    }
+  </script>
+
+  <div class="card">
+    <div class="badge">💌 A tiny question with a big meaning</div>
+    <h1>Will you be my Valentine?</h1>
+    <p class="sub">
+      I don’t need a perfect day. I just want <span style="color:var(--accent); font-weight:700;">you</span>—
+      your smile, your laugh, and the way you make everything feel like home.
+    </p>
+
+    <div class="btns" id="btnArea">
+      <button id="yesBtn">Yes 💘</button>
+      <button id="noBtn" aria-label="No button">No 🙈</button>
+    </div>
+
+    <div class="note" id="note"></div>
+
+    <div class="names">
+      From: <strong>Sanath</strong> to <strong>Abinaya</strong>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modalCard">
+      <h2 id="modalTitle">YAY!! Mah CUTIE PIE 💖</h2>
+      <p id="modalText">
+        Okay… I am officially the happiest person today.  
+        I’ll plan something sweet — just you and me.
+      </p>
+      <div class="modalBtns">
+        <button class="primary" id="modalOk">Aww ❤️</button>
+        <button class="ghost" id="modalCopy">Copy message</button>
+      </div>
+      <div class="tiny">I alway love you as the same mah baby ❤️.</div>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn  = document.getElementById('noBtn');
+    const note   = document.getElementById('note');
+    const modal  = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText  = document.getElementById('modalText');
+    const modalOk = document.getElementById('modalOk');
+    const modalCopy = document.getElementById('modalCopy');
+
+    // Playful lines when "No" is approached/clicked
+    const dodgeLines = [
+      "Hehe… are you sure? 😇",
+      "Not so fast 😌",
+      "My heart says try again 💗",
+      "Okay okay… but hear me out 🥺",
+      "I’m blushing… just a little 🫶",
+      "One more time…? 🌹"
+    ];
+
+    // Respectful behavior: it dodges a few times, then becomes clickable.
+    let dodgesLeft = 5;
+
+    function showModal(type){
+      if(type === 'yes'){
+        modalTitle.textContent = "YAY!! 💖";
+        modalText.textContent =
+          "Okay… I’m officially the happiest person today. I’ll plan something sweet—just you and me.";
+      } else {
+        modalTitle.textContent = "Always respected 💛";
+        modalText.textContent =
+          "Thank you for being honest. No pressure, no bad feelings—I'm still lucky to have you in my life.";
+      }
+      modal.classList.add('show');
+    }
+
+    modalOk.addEventListener('click', () => modal.classList.remove('show'));
+    modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('show'); });
+
+    yesBtn.addEventListener('click', () => {
+      // make YES grow a bit for cute effect
+      yesBtn.style.transform = "translateY(-2px) scale(1.05)";
+      setTimeout(()=> yesBtn.style.transform = "", 140);
+      note.textContent = "I knew it 💘";
+      showModal('yes');
+      // confetti-ish: quick heart burst (simple)
+      for(let i=0;i<12;i++){
+        const h=document.createElement('div');
+        h.className='heart';
+        h.style.left = (45 + (Math.random()*10-5)) + 'vw';
+        h.style.top = (45 + (Math.random()*10-5)) + 'vh';
+        h.style.position='fixed';
+        h.style.opacity='0.45';
+        const size=10+Math.random()*14;
+        h.style.width=size+'px'; h.style.height=size+'px';
+        h.style.animationDuration = (4 + Math.random()*2) + 's';
+        document.body.appendChild(h);
+        setTimeout(()=> h.remove(), 5200);
+      }
+    });
+
+    // DODGE behavior on hover/touch
+    function dodge(){
+      if(dodgesLeft <= 0) return; // stop dodging; allow a real click
+      dodgesLeft--;
+
+      const msg = dodgeLines[Math.floor(Math.random()*dodgeLines.length)];
+      note.textContent = msg;
+
+      // move button within a safe range
+      const x = (Math.random()*220 - 110); // -110..110
+      const y = (Math.random()*110 - 55);  // -55..55
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+      // After dodges are used, make it normal and gentle
+      if(dodgesLeft === 0){
+        note.textContent = "Okay, I’ll stop teasing 😊 You can choose freely.";
+        noBtn.style.transform = "translate(0,0)";
+        noBtn.textContent = "No (it’s okay) 💛";
+      }
+    }
+
+    // Desktop hover
+    noBtn.addEventListener('mouseenter', dodge);
+    // Mobile touch (first taps dodge; then it works)
+    noBtn.addEventListener('touchstart', (e) => { if(dodgesLeft>0){ e.preventDefault(); dodge(); } }, {passive:false});
+
+    // If they click when dodges are over, show respectful message
+    noBtn.addEventListener('click', () => {
+      if(dodgesLeft > 0){
+        // If someone manages to click early, just dodge once more
+        dodge();
+        return;
+      }
+      showModal('no');
+    });
+
+    modalCopy.addEventListener('click', async () => {
+      const text =
+`Will you be my Valentine? 💌
+
+I don’t need a perfect day. I just want you—your smile, your laugh, and the way you make everything feel like home.
+
+— (Your Name)`;
+      try{
+        await navigator.clipboard.writeText(text);
+        modalCopy.textContent = "Copied ✅";
+        setTimeout(()=> modalCopy.textContent="Copy message", 1200);
+      }catch{
+        modalCopy.textContent = "Copy failed";
+        setTimeout(()=> modalCopy.textContent="Copy message", 1200);
+      }
+    });
+  </script>
+</body>
+</html>
